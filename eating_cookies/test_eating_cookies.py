@@ -1,5 +1,5 @@
 import unittest
-from eating_cookies import eating_cookies
+from eating_cookies_2 import eating_cookies
 
 
 class Test(unittest.TestCase):
@@ -12,10 +12,10 @@ class Test(unittest.TestCase):
         self.assertEqual(eating_cookies(10), 274)
 
     # def test_eating_cookies_large_n(self):
-        # float(f"50{''.join([str(0) for i in range(51)])}")
-        # 50, [0 for i in range(51)]
-
-        # self.assertEqual(eating_cookies(float(f"50{''.join([str(0) for i in range(51)])}")), 10562230626642)
+    #     # float(f"50{''.join([str(0) for i in range(51)])}")
+    #     # 50, [0 for i in range(51)]
+    #
+    #     self.assertEqual(eating_cookies(float(f"50{''.join([str(0) for i in range(51)])}")), 10562230626642)
         # self.assertEqual(eating_cookies(100, [0 for i in range(101)]), 180396380815100901214157639)
         # self.assertEqual(eating_cookies(float(f"500{''.join([str(0) for i in range(501)])}")),
         #                  1306186569702186634983475450062372018715120191391192207156664343051610913971927959744519676992404852130396504615663042713312314219527)
