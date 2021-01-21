@@ -2,6 +2,7 @@ import unittest
 import random
 from product_of_all_other_numbers import product_of_all_other_numbers
 
+
 class Test(unittest.TestCase):
     def test_product_of_all_other_numbers_division_friendly(self):
         self.assertEqual(product_of_all_other_numbers([9, 90]), [90, 9])
@@ -18,6 +19,7 @@ class Test(unittest.TestCase):
     #     expected = [0, 0, 0, 0, 0, 94832640, 0, 0, 0, 0, 0]
 
     #     self.assertEqual(product_of_all_other_numbers(arr), expected)
+
 
 if __name__ == '__main__':
     unittest.main()
