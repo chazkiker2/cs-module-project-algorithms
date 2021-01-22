@@ -1,6 +1,6 @@
 import unittest
-from eating_cookies_2 import eating_cookies
-
+# from eating_cookies_3 import eating_cookies
+from eat_cookies import eating_cookies
 
 class Test(unittest.TestCase):
 

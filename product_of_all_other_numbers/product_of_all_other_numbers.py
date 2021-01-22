@@ -10,24 +10,23 @@ def product_of_all_other_numbers(arr):
     product_so_far = 1
 
     for i in range(len(arr)):  # for each el in arr
-        # assign prod so far to bucket
+        # assign product_so_far to bucket at index i
         products[i] = product_so_far
-        # multiply prod_so_far by the given element
+        # multiply prod_so_far by the element in arr at index i
         product_so_far *= arr[i]
 
-    product_so_far = 1
+    product_so_far = 1  # reset product to 1
 
-    # for (let i=len(arr)-1; i>0; i--) {
-    # }
     # if [1,2,3] -> i=2, i=1, i=0
     #
+    # for ( i=arr.length(); i>-1; i--) {
     # range(start, stop, step)
+    # loops through range backwards (starting at len of arr - 1)
     for i in range(len(arr) - 1, -1, -1):
-        print(i)
-        products[i] *= product_so_far
-        product_so_far *= arr[i]
+        products[i] *= product_so_far  # multiply el at index i by product_so_far
+        product_so_far *= arr[i]  # multiply product_so_far by el at index i in arr
 
-    return products
+    return products  # return list of products
 
 
 # def product_of_all_other_numbers(arr):

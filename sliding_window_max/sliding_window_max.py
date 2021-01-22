@@ -4,9 +4,11 @@ Returns: a List of integers
 '''
 from collections import deque
 
+
 # doc challenge
-def sliding_window_max_docs(nums, k):
-    # Use Deque on this
+def sliding_window_max_doc(nums, k):
+    """@Doc's hints for anyone hoping to make an efficient solution"""
+    # Use collections.deque on this (from collections import deque)
     # create empty list for max(
     maxes = []
     dq = deque()
@@ -20,9 +22,13 @@ def sliding_window_max_docs(nums, k):
 
 
 def sliding_window_max(nums, k):
+    """O(n^2) — could use improvement but definitely a very readable solution"""
     max_values = [0] * (len(nums) - k + 1)
 
     for i in range(len(nums) - k + 1):  # every index up until length - k
+        # max() is O(n) and we stuck it in a for loop...
+        # for loops are O(n)
+        # the line below is the problem with our time complexity
         max_values[i] = max(nums[i:i + k])
 
     return max_values

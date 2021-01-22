@@ -196,6 +196,16 @@ def eating_cookies_iter(n):
     # declare
 
 
+def eating_cookies(n):  # NAIVE RECURSIVE SOLUTION
+    if n < 0:  # in case input is invalid (can't eat negative cookies)
+        return 0
+    elif n == 0:  # the cookies are all gone
+        return 1  # there's only one way to eat 0 cookies — not at all
+    else:  # there are still cookies left!
+        return eating_cookies(n - 1) + eating_cookies(n - 2) + eating_cookies(n - 3)
+
+
+# NOTES ABOUT eating_cookies
 # input = n cookies (int)
 # output = number of ways to eat a cookie (int)
 #
@@ -227,19 +237,9 @@ def eating_cookies_iter(n):
 # finally, take eating_cookies(n-1) off top of stack, compute, add result to result stack
 
 # num_cookies_left = 0 -> how many ways can you eat 0 cookies?
-# - the only way to eat 0 cookies is to not eat cookies
+# - the only way to eat 0 cookies is to not eat any cookies at all!
 # (so then, 1 way to eat 0 cookies: not at all!)
-#
-# n = 3:  you could eat 1 cookie, 1 cookie, 1 cookie
-# 1 1 1 -> 0 2 1 ->
-# return eating_cookies(3-1=2) + eating_cookies(3-2=1) + eating_cookies(3-3=0)
-# n-1 ==
-# eating_cookies(2)
-#                1                    1                  0
-#   -> eating_cookies(1) + eating_cookies(0) + eating_cookies(-1)
-#       -> eating_cookies(1) -> eating_cookies(0) + eating_cookies(-1) + eating_cookies(-2) = 1 + 0 + 0
-# n-2 = eating_cookies(1) -> eating_cookies(0) + eating_cookies(-1) + eating_cookies(-2)
-# n-3 = eating_cookies(0) -> 1
+
 # three ways to eat cookies:
 # 1. n-1 (eat one cookie)
 # 2. n-2 (eat two cookies)
@@ -250,14 +250,6 @@ def eating_cookies_iter(n):
 
 # the smallest n will ever be is -2
 # because any n less than or equal to 0 does not recurse
-def eating_cookies(n):
-    if n < 0:  # in case input is invalid (can't eat negative cookies)
-        return 0
-    elif n == 0:  # the cookies are all gone
-        return 1  # there's only one way to eat 0 cookies — not at all
-    else:  # there are still cookies left!
-        return eating_cookies(n - 1) + eating_cookies(n - 2) + eating_cookies(n - 3)
-
 
 # the smallest n will ever be is 0
 # because any n less than three does not recurse
@@ -279,15 +271,15 @@ def eating_cookies_(n):
 #   eating_cookies(1) -> return eating_cookies(0) + eating
 
 # My version
-# TEST CASE = eating_cookies_(3)
-# eating_cookies_(n) where n = 3:
+# TEST CASE = eating_cookies_naive(3)
+# eating_cookies_naive(n) where n = 3:
 #
-# return eating_cookies_(2) + eating_cookies_(1) + eating_cookies_(0)
-#   eating_cookies_(2) -> return 2
-#   eating_cookies_(1) -> return 1
-#   eating_cookies_(0) -> return 1
+# return eating_cookies_naive(2) + eating_cookies_naive(1) + eating_cookies_naive(0)
+#   eating_cookies_naive(2) -> return 2
+#   eating_cookies_naive(1) -> return 1
+#   eating_cookies_naive(0) -> return 1
 # so return 2 + 1 + 1 = 4
-# thus, eating_cookies_(3) returns 4
+# thus, eating_cookies_naive(3) returns 4
 
 if __name__ == "__main__":
     # Use the main function here to test out your implementation

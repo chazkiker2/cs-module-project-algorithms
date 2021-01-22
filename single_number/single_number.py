@@ -5,6 +5,7 @@ Returns: an integer
 
 
 def single_num_doc(arr):
+    """Thank you @Doc"""
     ans = 0
     for x in arr:
         ans ^= x  # mystery operator (bitwise)
@@ -13,17 +14,22 @@ def single_num_doc(arr):
 
 
 def single_number(arr):
+    """THIS IS NOT A GREAT SOLUTION, BUT IT'S WHERE WE GOT"""
     # start with a dict
     dic = {}
 
     # loop through input arr
     for num in arr:
         # if num in dict: delete
-        if dic.get(num):
+        if dic.get(num):  # dic.get(x) returns None if num is not in dict
             del dic[num]
-        # if it IS in dict: increase count
+
+        # if it is NOT in dict, initialize that value
         else:
             dic[num] = 1
+
+    return next(iter(dic.keys()))  # O(n) — return the first el in iteration of dic.keys()
+
 
         # fastest fix: if not dic[num] (lookup)
 
@@ -32,10 +38,6 @@ def single_number(arr):
     #     if dic[key] == 1:
     #         # return the key in dict where value is 1
     #         return key
-
-    return next(iter(dic.keys()))  # O(n)
-
-
 # REFLECT on FIRST PASS
 # Time complexity -> O(n^2)
 # possible improvements:

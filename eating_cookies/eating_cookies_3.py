@@ -1,7 +1,7 @@
 def eating_cookies(n, cache={}):
     if cache == {}:
         cache = {i: 0 for i in range(n + 1)}
-        # Empty Cache Bucket! Dictionary Comprehension {1:0, 2:0, 3:0 etc}
+        # Empty Cache Bucket! Dictionary Comprehension {1:0, 2:0,..., n+1: 0}
 
     # checks if negative cookies which would have no way of eating it
     if n < 0:
