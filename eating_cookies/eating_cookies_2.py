@@ -1,25 +1,7 @@
-from functools import cache as funccache
-
-t_cache = {
-    0: 0,
-    1: 0,
-    2: 1
-}
+from functools import cache as functools_cache
 
 
-# def doc_eating_cookies(n):
-#     if n == 0:
-#         return 1
-
-
-def trib_memoized(n):
-    if n not in t_cache:
-        t_cache[n] = trib_memoized(n - 1) + trib_memoized(n - 2) + trib_memoized(n - 3)
-
-    return t_cache[n]
-
-
-@funccache
+@functools_cache
 def trib_cache(n):
     if n == 0 or n == 1:
         return 0
@@ -29,36 +11,52 @@ def trib_cache(n):
     return trib_cache(n - 1) + trib_cache(n - 2) + trib_cache(n - 3)
 
 
-def eating_cookies(n):
-    # if n < 0:
-    #     return None  # invalid input
-
-    if n < 2:  # 0, 1
-        return 1
-
-    if n == 2:  # 1+1=2, 2=2
-        return 2
-
-    # if cache == {}:
-    #     cache = {0: 0,
-    #              1: 0,
-    #              2: 1}
-
-    # return trib_cache(n + 2)
-    # eating_cookies(3) -> eating_cookies(2) + eating_cookies(1) + eating_cookies(0)
-    #
-    return trib_memoized(n + 2)
+cache = {
+    0: 1,
+    1: 1,
+    2: 2,
+}
 
 
-# 0: 0, 1: 0, 2: 1, 3: 2
-# 0 0 1 2 4
-# 1 1 2 4 7
-# 0 1 2 3 4
-#     if n == 0:
-#         return 1
+# def make_cache(n):
+#     cache_ = {i: 0 for i in range(n + 1)}
+#     cache_.update({
+#         0: 1,
+#         1: 1,
+#         2: 2
+#     })
+#     return cache_
+#
+
+def eating_cookies(n, t_cache={}):
+    if t_cache == {}:
+        cache.update({i: 0 for i in range(len(cache) - 1, n + 1)})
+        t_cache = cache
+        # print(cache)
+        # t_cache = {i: 0 for i in range(n + 1)}
+        # t_cache.update({
+        #     0: 1,
+        #     1: 1,
+        #     2: 2
+        # })
+
+    def trib_memoized(n):
+        if t_cache[n] == 0:
+            t_cache[n] = trib_memoized(n - 1) + trib_memoized(n - 2) + trib_memoized(n - 3)
+
+        return t_cache[n]
+
+    return trib_memoized(n)
 
 
 if __name__ == "__main__":
-    num_cookies = 3
+    try:
+        num_cookies = 800
+        print(f"There are {eating_cookies(num_cookies)} ways for Cookie Monster to eat {num_cookies} cookies")
+    except:
+        import dis
+        # import sys
 
-    print(f"There are {eating_cookies(num_cookies)} ways for Cookie Monster to each {num_cookies} cookies")
+        # exc_type, exc_value, exc_tb = sys.exc_info()
+        # dis.distb(exc_tb)
+        dis.dis(eating_cookies)

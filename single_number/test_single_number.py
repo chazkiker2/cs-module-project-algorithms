@@ -1,6 +1,6 @@
 import unittest
 import random
-from single_number import single_number
+from single_number import single_num_chaz as single_number
 
 
 class Test(unittest.TestCase):

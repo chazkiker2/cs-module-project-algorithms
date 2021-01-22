@@ -11,12 +11,17 @@ def sliding_window_max_doc(nums, k):
     # Use collections.deque on this (from collections import deque)
     # create empty list for max(
     maxes = []
-    dq = deque()
-    # while loop inside for loop WorstCase=O(n^2)
+    deq = deque(nums)
+    # while loop inside for loop
     # pop in while loop
-    #
+
     # need to invoke: pop(), append(), and pop_left()
     # instead of using range(), use enumerate()
+
+    for num in nums:
+        count = 0
+        while count < k:
+
 
     return None
 
