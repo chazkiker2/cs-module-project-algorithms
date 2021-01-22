@@ -4,27 +4,37 @@ Returns: an integer
 '''
 
 
+def single_num_doc(arr):
+    ans = 0
+    for x in arr:
+        ans ^= x  # mystery operator (bitwise)
+
+    return ans
+
+
 def single_number(arr):
     # start with a dict
     dic = {}
 
     # loop through input arr
     for num in arr:
-        # if num not in dict: make a new key there equal to 1 (acting as counter)
-        if num not in dic:  # this could be refactored for faster time complexity
-            dic[num] = 1
-
+        # if num in dict: delete
+        if dic.get(num):
+            del dic[num]
         # if it IS in dict: increase count
         else:
-            dic[num] += 1
+            dic[num] = 1
 
         # fastest fix: if not dic[num] (lookup)
 
     # loop through dict for wherever the value is 1
-    for key in dic:
-        if dic[key] == 1:
-            # return the key in dict where value is 1
-            return key
+    # for key in dic:
+    #     if dic[key] == 1:
+    #         # return the key in dict where value is 1
+    #         return key
+
+    return next(iter(dic.keys()))  # O(n)
+
 
 # REFLECT on FIRST PASS
 # Time complexity -> O(n^2)

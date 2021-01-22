@@ -5,6 +5,35 @@ Returns: a List of integers
 
 
 def moving_zeroes(arr):
+    # the anti-doc method:  bucket = [0] * len(arr)
+    bucket = [0 for _ in arr]
+    counter = 0
+
+    for num in arr:
+        if num != 0:
+            bucket[counter] = num
+            counter += 1
+
+    return bucket
+
+    # approach 3
+    # bucket_2 = [num for num in arr if num != 0]
+    # bucket_2 += [0] * (len(arr) - len(bucket_2))
+    # return bucket_2
+
+# else:  # num is 0
+# move num right
+# counter+=1
+# arr.append(num)  # add duplicate of num to end of list
+# arr.remove(num)  # remove the first instance of num (leftmost instance)
+# under the hood
+# for i in arr:
+#     if i == num:
+#         del arr[i]
+
+# final objective: return the sorted List of integers
+
+def moving_zeroes_first_pass(arr):
     # overall goal: find the non-zero integers in
     # given List of integers
 
@@ -25,6 +54,7 @@ def moving_zeroes(arr):
     # final objective: return the sorted List of integers
     return arr
 
+
 # REFLECTING ON FIRST PASS
 # white-boarding is all about showing how you think
 #
@@ -32,7 +62,6 @@ def moving_zeroes(arr):
 #
 # First pass was pretty efficient, only a couple of details worth changing:
 # - append and remove are not the most efficient
-
 
 
 if __name__ == '__main__':

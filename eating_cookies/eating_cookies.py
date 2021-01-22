@@ -73,7 +73,7 @@ def trib_cache_iter(n, cache):
 #
 # a(n)=a(n-1) + a(n-2) + a(n-3)
 #
-def eating_cookies(n):
+def eating_cookies_old(n):
     if n < 0:
         return None  # invalid input
 
@@ -195,8 +195,99 @@ def eating_cookies_iter(n):
     # use dict
     # declare
 
-    # pass
 
+# input = n cookies (int)
+# output = number of ways to eat a cookie (int)
+#
+# transformation
+#
+# ways to eat: 1 at a time, 2 at a time, or 3 at a time
+# - number of cookies left = n
+# - eat 1 cookie at a time=(n-1),
+# - eat 2 cookies at a time=(n-2)
+# - eat 3 cookies at a time=(n-3)
+#
+# repeat process some number of time: recursion
+#
+# recursion:
+# - base case (a condition to stop recurse)
+# - function that calls itself
+# - moves toward base case
+#
+# mental mode: recursion is like a while loop
+# recursion can almost always be represented by a while loop
+# base case is condition where while loop would exit
+# DM Doc if you want more info
+
+# first, function calls itself.
+# EXEC STACK: eating_cookies(n-1).... + eating_cookies(n-2) .... + eating_cookies(n-3)
+# eat_cookies(n-3) on TOP of stack, so it's first to be pulled OFF
+# eating_cookies(n-3) = res -> place result on RESULT STACK
+# then take eating_cookies(n-2) off the top of stack, compute, add result to result stack
+# finally, take eating_cookies(n-1) off top of stack, compute, add result to result stack
+
+# num_cookies_left = 0 -> how many ways can you eat 0 cookies?
+# - the only way to eat 0 cookies is to not eat cookies
+# (so then, 1 way to eat 0 cookies: not at all!)
+#
+# n = 3:  you could eat 1 cookie, 1 cookie, 1 cookie
+# 1 1 1 -> 0 2 1 ->
+# return eating_cookies(3-1=2) + eating_cookies(3-2=1) + eating_cookies(3-3=0)
+# n-1 ==
+# eating_cookies(2)
+#                1                    1                  0
+#   -> eating_cookies(1) + eating_cookies(0) + eating_cookies(-1)
+#       -> eating_cookies(1) -> eating_cookies(0) + eating_cookies(-1) + eating_cookies(-2) = 1 + 0 + 0
+# n-2 = eating_cookies(1) -> eating_cookies(0) + eating_cookies(-1) + eating_cookies(-2)
+# n-3 = eating_cookies(0) -> 1
+# three ways to eat cookies:
+# 1. n-1 (eat one cookie)
+# 2. n-2 (eat two cookies)
+# 3. n-3 (eat three cookies)
+# if n-3 is called and 3 is n: n will then be 0. next time it's called, return 1 b/c n == 0
+#
+
+
+# the smallest n will ever be is -2
+# because any n less than or equal to 0 does not recurse
+def eating_cookies(n):
+    if n < 0:  # in case input is invalid (can't eat negative cookies)
+        return 0
+    elif n == 0:  # the cookies are all gone
+        return 1  # there's only one way to eat 0 cookies — not at all
+    else:  # there are still cookies left!
+        return eating_cookies(n - 1) + eating_cookies(n - 2) + eating_cookies(n - 3)
+
+
+# the smallest n will ever be is 0
+# because any n less than three does not recurse
+def eating_cookies_(n):
+    if n == 0 or n == 1:
+        return 1
+    elif n == 2:
+        return 2
+    else:
+        return eating_cookies_(n - 1) + eating_cookies_(n - 2) + eating_cookies(n - 3)
+
+
+# Your version
+# eating_cookies(n-3) where n = 3:
+# return eating_cookies(2) + eating_cookies(1) + eating_cookies(0)
+#   eating_cookies(2) -> return eating_cookies(1) + eating_cookies(0) + eating_cookies(-1)
+#       eating_cookies(1) -> return eating_cookies(0) + eating_cookies(-1) + eating_cookies(-2)
+#           eating_cookies(0) -> return 1
+#   eating_cookies(1) -> return eating_cookies(0) + eating
+
+# My version
+# TEST CASE = eating_cookies_(3)
+# eating_cookies_(n) where n = 3:
+#
+# return eating_cookies_(2) + eating_cookies_(1) + eating_cookies_(0)
+#   eating_cookies_(2) -> return 2
+#   eating_cookies_(1) -> return 1
+#   eating_cookies_(0) -> return 1
+# so return 2 + 1 + 1 = 4
+# thus, eating_cookies_(3) returns 4
 
 if __name__ == "__main__":
     # Use the main function here to test out your implementation

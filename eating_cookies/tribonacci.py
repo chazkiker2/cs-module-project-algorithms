@@ -1,3 +1,4 @@
+# from math import exp, log, sqrt
 # 0 0 1 1 2 4 7 13 ...
 # 0 1 2 3 4 5 6 7 ...
 """
@@ -6,6 +7,14 @@ trib(1): 0
 trib(2): 1
 trib(n): trib(n - 1) + trib(n - 2) + trib(n - 3)
 """
+
+
+# def trib_maths(n):
+#     n_root = lambda x, y: exp(1.0 / y * log(x))
+#     # trConst = (1 + f_nRoot(19 + (3. * sqrt(33)), 3) + f_nRoot(19 - (3. * sqrt(33)), 3)) / 3.
+#     tr_const = (1 + n_root(19 + (3.0 * sqrt(33)), 3) + n_root(19 - (3. * sqrt(33)), 3))  / 3.
+#
+#     # def n_root(x, n_): return exp(1. / n_ * log(x))
 
 
 def trib_naive(n):

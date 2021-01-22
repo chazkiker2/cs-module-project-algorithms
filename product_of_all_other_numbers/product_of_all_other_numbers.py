@@ -2,6 +2,53 @@
 Input: a List of integers
 Returns: a List of integers
 '''
+from math import prod
+
+
+def product_of_all_other_numbers(arr):
+    products = [0 for _ in range(len(arr))]
+    product_so_far = 1
+
+    for i in range(len(arr)):  # for each el in arr
+        # assign prod so far to bucket
+        products[i] = product_so_far
+        # multiply prod_so_far by the given element
+        product_so_far *= arr[i]
+
+    product_so_far = 1
+
+    # for (let i=len(arr)-1; i>0; i--) {
+    # }
+    # if [1,2,3] -> i=2, i=1, i=0
+    #
+    # range(start, stop, step)
+    for i in range(len(arr) - 1, -1, -1):
+        print(i)
+        products[i] *= product_so_far
+        product_so_far *= arr[i]
+
+    return products
+
+
+# def product_of_all_other_numbers(arr):
+#     product = prod(arr)
+#
+#     product_bucket = [1 for _ in arr]
+#     cur_val = 1
+#     cur_idx = 0
+#
+#     if arr[0] is None:
+#         return None
+#
+#     for i in range(len(arr)):
+#         if cur_idx != i:
+#         # cur_val
+#         # temp = arr[i]
+#         # arr.pop(i)
+#
+#         product_bucket[i] = product[i] / arr[i]
+#
+#     return product_bucket
 
 
 # we do not yet know the size of the array
@@ -20,7 +67,7 @@ Returns: a List of integers
 # return array
 
 # list comprehension from Doc later
-def product_of_all_other_numbers(arr):
+def product_of_all_other_numbers_first_pass(arr):
     # multiply everything except the current element
     #
     # check to make sure array is not empty
@@ -53,6 +100,5 @@ if __name__ == '__main__':
     # arr = [1, 2, 3, 4, 5]
     arr = [2, 6, 9, 8, 2, 2, 9, 10, 7, 4, 7, 1, 9, 5, 9, 1, 8, 1, 8, 6, 2, 6, 4, 8, 9, 5, 4, 9, 10, 3, 9, 1, 9, 2, 6, 8,
            5, 5, 4, 7, 7, 5, 8, 1, 6, 5, 1, 7, 7, 8]
-
 
     print(f"Output of product_of_all_other_numbers: {product_of_all_other_numbers(arr)}")
